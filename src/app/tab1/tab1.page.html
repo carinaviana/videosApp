@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="tertiary">
     <ion-title>
-      Vídeos App
+      {{ titulo }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,22 +11,25 @@
   <ion-searchbar placeholder="Buscar"></ion-searchbar>
 
   <ion-list>
-    <ion-item-sliding>
-
+    <ion-item-sliding *ngFor="let filme of listaVideos">
     <ion-item lines="full">
       <ion-thumbnail slot="start">
-        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qDA95ebiy3W3m8hTRB3xZNZVVBM.jpg">
+        <img
+          [src]="filme.cartaz"/>
       </ion-thumbnail>
-      <ion-label>
+
+      <ion-label class="ion-text-wrap">
         <div>
-          <h1>Mulher-Maravilha 1984</h1>
-          <p>17/12/2020 (BR) - 2h 31m</p>
-          <p>Fantasia, Ação, Aventura</p>
+          <h1>{{filme.nome}}</h1>
+          <p>{{filme.lancamento}} - {{filme.duracao}}</p>
+          <ion-badge color="light" *ngFor="let genero of filme.generos">
+            {{genero}}
+            </ion-badge>
         </div>
       </ion-label>
 
       <ion-chip color="success" outline>
-        <ion-label>67%</ion-label>
+        <ion-label>{{filme.classificacao}}%</ion-label>
       </ion-chip>
     </ion-item>
 
@@ -37,29 +40,6 @@
     </ion-item-options>
   </ion-item-sliding>
 
-  <ion-item-sliding>
-    <ion-item lines="full">
-      <ion-thumbnail slot="start">
-        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9NvYyM8H6d5KAVGqpyFV9YPO5cU.jpg">
-      </ion-thumbnail>
-      <ion-label>
-        <div>
-          <h1>Tom & Jerry - O Filme</h1>
-          <p>11/02/2021 (BR) - 1h 41m</p>
-          <p>Comédia, Família, Animação</p>
-        </div>
-      </ion-label>
 
-      <ion-chip color="success" outline>
-        <ion-label>73%</ion-label>
-      </ion-chip>
-    </ion-item>
-
-    <ion-item-options side="end">
-      <ion-item-option color="laranja" (click)="presentAlertConfirm()">
-        <ion-icon slot="icon-only" name="star"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
   </ion-list>
 </ion-content>
