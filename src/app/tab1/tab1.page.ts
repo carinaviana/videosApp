@@ -2,6 +2,8 @@ import { IFilme } from './../models/IFilmes.model';
 import { Component } from '@angular/core';
 import { AlertController, SelectValueAccessor } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { DadosService } from '../services/dados.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -14,21 +16,23 @@ export class Tab1Page {
 
   listaVideos: IFilme[] = [
     {
-      nome: 'Mulher-Maravilha 1984',
-      lancamento: '17/12/2020',
-      duracao: '2h 31m',
-      classificacao: 67,
-      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qDA95ebiy3W3m8hTRB3xZNZVVBM.jpg',
-      generos: ['Fantasia', 'Ação', 'Aventura']
+      nome: 'Mortal Kombat',
+      lancamento: '15/04/2021',
+      duracao: '1h 50m',
+      classificacao: 76,
+      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/ijvC2w2yANsfgLT3LMu2zFr0fxh.jpg',
+      generos: ['Fantasia', 'Ação', 'Aventura'],
+      pagina: '/mortal-kombat'
     },
 
     {
-      nome: 'Tom & Jerry - O Filme(2021)',
-      lancamento: '11/02/2021',
-      duracao: '1h 41m',
+      nome: 'Sem Remorso',
+      lancamento: '30/04/2021',
+      duracao: '1h 50m',
       classificacao: 73,
-      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9NvYyM8H6d5KAVGqpyFV9YPO5cU.jpg',
-      generos: ['Comédia', 'Família', 'Animação']
+      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uHEZ4ZMziIjlAgCTQAEh9ROvtj0.jpg',
+      generos: ['Ação', 'Thriller', 'Guerra'],
+      pagina: '/sem-remorso'
     },
 
     {
@@ -37,7 +41,8 @@ export class Tab1Page {
       duracao: '1h 47m',
       classificacao: 82,
       cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/o2NTWpD6LVf1YyPKTdvcEuHqcJ6.jpg',
-      generos: ['Aventura', 'Animação', 'Fantasia']
+      generos: ['Aventura', 'Animação', 'Fantasia'],
+      pagina: '/raia'
       },
 
       {
@@ -59,7 +64,16 @@ export class Tab1Page {
         }
   ];
 
-  constructor(public alertController: AlertController, public toastController: ToastController) { }
+  constructor(
+    public alertController: AlertController,
+    public toastController: ToastController,
+    public dadosService: DadosService,
+    public route: Router) { }
+
+    exibirFilme(filme: IFilme){
+      this.dadosService.guardarDados('filme', filme);
+      this.route.navigateByUrl('/dados-filme');
+    }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
