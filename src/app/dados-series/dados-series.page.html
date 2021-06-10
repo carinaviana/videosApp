@@ -11,21 +11,19 @@
 <ion-content color="light">
   <ion-card *ngIf="series">
     <ion-card-header>
-      <img *ngIf="series.poster_path"
-      src="https:https://www.themoviedb.org/t/p/w500/{{series.poster_path}}"/>
+      <img *ngIf="series.poster_path" src="https://www.themoviedb.org/t/p/w500/{{series.poster_path}}">
       <ion-icon *ngIf="!series.poster_path" name="videocam-off"></ion-icon>
     </ion-card-header>
 
     <ion-card-content>
-     <h1>{{ series.name }} -
-       <ion-chip color="success">{{series.vote_average}}%</ion-chip>
-      </h1>
-     <p>{{series.first_air_date| date: 'shortDate'}}</p>
+      <h1>{{series.name}} - <ion-chip [color]="series.vote_average < 5 ? 'danger' : ((series.vote_average < 7 ? 'warning' : 'success'))"
+        outline>
+        <ion-label>{{series.vote_average}}</ion-label>
+      </ion-chip></h1>
+      <p>{{series.first_air_date | date: 'shortDate' }}</p>
     </ion-card-content>
-    <ion-item>
-      <ion-badge color="light" *ngFor="let idGenero of series.genre_ids">
-        {{generos[idGenero]}}
-      </ion-badge>
-    </ion-item>
+      <ion-item>
+        <ion-badge color="light" *ngFor="let idGenero of series.genre_ids">{{generos[idGenero]}}</ion-badge>
+      </ion-item>
   </ion-card>
 </ion-content>

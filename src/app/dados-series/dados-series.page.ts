@@ -26,9 +26,9 @@ export class DadosSeriesPage implements OnInit {
     this.series = this.dadosService.pegarDados('serie');
     this.generos = this.dadosService.pegarDados('generos');
 
-    this.generoService.buscarGenero('serie').subscribe(dados =>{
+    this.generoService.buscarGenero('tv').subscribe(dados =>{
       dados.genres.forEach(genero => {
-        this.generoService[genero.id] = genero.name;
+        this.generos[genero.id] = genero.name;
       });
     });
   }
